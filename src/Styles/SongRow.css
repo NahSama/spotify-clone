@@ -1,0 +1,51 @@
+.songRow {
+    margin-left: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    color: white;
+  }
+  
+  .songRow:hover {
+    cursor: pointer;
+    background-color: black;
+    opacity: 0.8;
+  }
+  
+  .songRow__info {
+    flex: 0.4;
+    display:flex;
+    margin-left: 20px;
+  }
+
+  .songRow__name {
+    margin-left: 10px;
+    left: 0;
+  }
+  
+  .songRow__name > h1 {
+    font-size: 16px;
+  }
+  
+  .songRow__name > p {
+    font-size: 14px;
+    margin-top: 3px;
+    color: gray;
+    margin: auto;
+  }
+  
+  .songRow__avatar {
+    margin: auto 0 ;
+    height: 40px;
+    width: 40px;
+  }
+  
+  .songRow__album{
+      flex: 0.3
+  }
+
+  .songRow__time{
+      flex: 0.2;
+      margin-left: auto;
+  }
