@@ -11,23 +11,64 @@ import { Favorite } from '@material-ui/icons';
 
 export default function Body({spotify}) {
     
-    const [{ discover_weekly }, dispatch] = useDataLayerValue();
+    const [{ current_playlist }, dispatch] = useDataLayerValue();
+
+    // console.log("This is current playlist", current_playlist);
+
+    const playPlaylist = (id) => {
+        spotify
+            .play({
+                context_uri: `spotify:playlist:${current_playlist.id}`,
+            })
+            .then((res) => {
+                spotify.getMyCurrentPlaybackState().then((r) => {
+                    dispatch({
+                        type: "SET_ITEM",
+                        item: r.item
+                    });
+                    dispatch({
+                        type: "SET_PLAYING",
+                        playing: true
+                    });
+                });
+            });
+    }
+
+    const playSong = (id) => {
+        spotify
+            .play({
+                uris: [`spotify:track:${id}`],
+            })
+            .then((res) => {
+                spotify.getMyCurrentPlaybackState().then((r) => {
+                    dispatch({
+                        type: "SET_ITEM",
+                        item: r.item
+                    });
+                    dispatch({
+                        type: "SET_PLAYING",
+                        playing: true,
+                    });
+                });
+            });
+    }
 
     return (
         <div className="body">
             <Header spotify={spotify}/>
             <div className="body__info">
-                <img src={discover_weekly?.images[0].url} alt="dw"/>
+                <img src={current_playlist?.images[0].url} alt="dw"/>
                 <div className="body__infoText">
-                    <strong>PLAYLIST</strong>
-                    <h2>Discover Weekly</h2>
-                    <p>{discover_weekly?.description}</p>
+                    <strong>Playlist</strong>
+                    <h2>{current_playlist?.name}</h2>
+                    <p>{current_playlist?.description}</p>
                 </div>
             </div>
             <div className="body__songs">
                 <div className="body__icons">
                     <PlayCircleFilledIcon
                         className="body__shuffle"
+                        onClick = {playPlaylist}
                     />
                     <FavoriteIcon fontSize="large" />
                     <MoreHorizIcon />
@@ -44,8 +85,8 @@ export default function Body({spotify}) {
                     </div>
                 </div>
                 {/* List of Songs */}
-                {discover_weekly?.tracks.items.map((item) => (
-                    <SongRow track={item.track}/>
+                {current_playlist?.tracks.items?.map((item, index) => (
+                    <SongRow key={index} track={item.track} playSong={playSong}/>
                 ))}
             </div>
         </div>

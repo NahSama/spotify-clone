@@ -5,12 +5,11 @@ import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import { useDataLayerValue } from './DataLayer';
+import PlaylistOption from './PlaylistOption';
 
-
-export default function Sidebar(props) {
+export default function Sidebar({spotify}) {
     
     const [{ playlists }, dispatch] = useDataLayerValue();
-    console.log(playlists);
 
     return (
         <div className="sidebar">
@@ -25,8 +24,17 @@ export default function Sidebar(props) {
             <br />
             <strong className="sidebar__title">PLAYLISTS</strong>
             <hr />
-            {playlists?.items?.map((playlist) => (
-                <SidebarOption option={playlist.name} />
+            {playlists?.items?.map((playlist, index) => (
+                <PlaylistOption 
+                    key={index} 
+                    playlist={playlist} 
+                    onClick={() => {
+                        spotify.getPlaylist(playlist.id).then((response) => {
+                        dispatch({
+                            type: "SET_CURRENT_PLAYLIST",
+                            current_playlist: response
+                            })
+                    })}}/>
             ))}
         </div>
     )

@@ -9,7 +9,7 @@ export function Player({spotify}) {
     return (
         <div className="player">
             <div className="player__body">
-                <Sidebar />
+                <Sidebar spotify={spotify}/>
                 <Body spotify={spotify} />
             </div>
             <Footer spotify={spotify} />

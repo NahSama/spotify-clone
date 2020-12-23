@@ -11,7 +11,7 @@ const spotify = new SpotifyWebAPi();
 
 
 function App() {
-    const [{token}, dispatch] = useDataLayerValue();
+    const [{token, current_playlist_id}, dispatch] = useDataLayerValue();
 
     //Run code based on a given condition
     useEffect(() => {
@@ -49,10 +49,8 @@ function App() {
                     discover_weekly: response
                 })
             })
-            
         }
-
-        console.log('I have a token', token);
+        console.log("I have token " + token)
     }, [])
 
     return (
@@ -60,7 +58,7 @@ function App() {
         <div className="app">
         {
             token ? (
-                <Player />
+                <Player spotify={spotify}/>
             ) : (
                 <Login />
 

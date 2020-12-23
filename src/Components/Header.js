@@ -8,7 +8,6 @@ import { useDataLayerValue } from './DataLayer';
 export default function Header({spotify}) {
     
     const [{ user }, dispatch] = useDataLayerValue();
-    console.log(user);
     return (
         <div className="header">
             <div className="header__left">

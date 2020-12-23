@@ -1,10 +1,13 @@
   
 import React from "react";
 import "../Styles/SidebarOption.css";
+// import { useDataLayerValue } from './DataLayer';
+
 
 function SidebarOption({ option = "test", Icon }) {
+
   return (
-    <div className="sidebarOption">
+    <div className="sidebarOption" >
       {Icon && <Icon className="sidebarOption__icon" />}
       {Icon ? <h4>{option}</h4> : <p>{option}</p>}
     </div>
