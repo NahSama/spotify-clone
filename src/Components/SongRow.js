@@ -22,7 +22,13 @@ export default function Songrow({track="test", playSong}) {
                 <div className="songRow__name">
                     <h1>{track.name}</h1>
                     <p>
-                        {track.artists.map((artist) => artist.name)}
+                        {track.artists.map((artist, index) => {
+                            if(index === track.artists.length - 1){
+                                return artist.name;
+                            }else{
+                                return artist.name + ", "
+                            }
+                        })}
                     </p>
                 </div>
                 

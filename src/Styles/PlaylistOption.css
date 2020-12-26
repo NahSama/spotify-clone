@@ -1,0 +1,33 @@
+.playlistOption {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    height: 40px;
+    color: grey;
+    transition: 200ms color ease-in;
+  }
+  
+  .playlistOption:hover {
+    color: white;
+  }
+
+  .playlistOption__currentOption {
+    color: white;
+  }
+  
+  .sidebar > hr {
+    border: 1px solid #282828;
+    width: 90%;
+    margin: 10px auto;
+  }
+  
+  .playlistOption__icon {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .playlistOption > p {
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 14px;
+  }

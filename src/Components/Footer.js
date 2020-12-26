@@ -29,6 +29,7 @@ export default function Footer({spotify}) {
                 });
             };
         })
+        spotify.play();
       }, );
 
     const handlePlayPause = () => {
