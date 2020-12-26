@@ -19,8 +19,8 @@ export default function Footer({spotify}) {
     
     useEffect(() => {
         spotify.getMyCurrentPlaybackState().then((r) => {
-            console.log("Context: My current track is " + item?.name);
-            console.log("Hook: My current track is " + r.item?.name);
+            // console.log("Context: My current track is " + item?.name);
+            // console.log("Hook: My current track is " + r.item?.name);
             
             if(item?.name !== r.item?.name){
                 dispatch({
@@ -47,23 +47,38 @@ export default function Footer({spotify}) {
         };
     };
 
-    const skipNext = () => {
+    // const skipNext = () => {
+    //     spotify.skipToNext().then((res) => {
+    //         console.log("Next track" + res);
+    //     });
+    //     spotify.getMyCurrentPlayingTrack().then((r) => {
+    //         console.log("My current track is" + r.item.name)
+    //       dispatch({
+    //         type: "SET_ITEM",
+    //         item: r.item,
+    //       });
+    //       dispatch({
+    //         type: "SET_PLAYING",
+    //         playing: true,
+    //       });
+    //     });
+    //   };
+
+    const skipNext = async() => {
         spotify.skipToNext();
-        spotify.getMyCurrentPlayingTrack().then((r) => {
-            // console.log("My current track is" + r.item.name)
-          dispatch({
+        const r = await spotify.getMyCurrentPlayingTrack();
+        dispatch({
             type: "SET_ITEM",
             item: r.item,
-          });
-          dispatch({
+        });
+        dispatch({
             type: "SET_PLAYING",
             playing: true,
-          });
         });
-      };
+    }
 
     const skipPrevious = () => {
-        spotify.skipToPrevious().then();
+        spotify.skipToPrevious();
         spotify.getMyCurrentPlayingTrack().then((r) => {
             dispatch({
                 type: "SET_ITEM",
